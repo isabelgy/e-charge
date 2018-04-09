@@ -1,4 +1,4 @@
-class StationsController < ApplicationController
+class StationsController < ActionController::Base
   def index
     @stations = Station.all
   end
