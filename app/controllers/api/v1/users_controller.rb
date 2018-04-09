@@ -1,6 +1,6 @@
 class UsersController < ActionController::Base
   def create
-    @user = user.new(user_params)
+    @user = User.new(user_params)
     unless @user.save
       render_error
     end
