@@ -16,11 +16,8 @@ class StationsController < ActionController::Base
     end
   end
 
-  def edit
-    @station = Station.find(params[:id])
-  end
-
   def update
+    @station = Station.find(params[:id])
     if @station.update(station_params)
       render :show
     else
@@ -31,6 +28,7 @@ class StationsController < ActionController::Base
   def destroy
     @station = Station.find(params[:id])
     @station.destroy
+    head :no_content
   end
 
 
