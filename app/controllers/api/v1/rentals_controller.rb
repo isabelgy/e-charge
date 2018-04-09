@@ -1,6 +1,6 @@
 class RentalsController < ActionController::Base
   def create
-    @rental = rental.new(rental_params)
+    @rental = Rental.new(rental_params)
     @station = Station.find(@rental[:station_id])
     @rental.station = @station
     @user = User.find(params[:user_id])
@@ -11,7 +11,7 @@ class RentalsController < ActionController::Base
   end
 
   def update
-    @rental = rental.find(params[:id])
+    @rental = Rental.find(params[:id])
     unless @rental.update(rental_params)
       render_error
     end
