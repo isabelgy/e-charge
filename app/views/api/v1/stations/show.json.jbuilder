@@ -1,1 +1,1 @@
-json.extract! @station, :location, :photo, :availability
+json.extract! @station, :id, :location, :photo, :availability
