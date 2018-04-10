@@ -1,4 +1,4 @@
-class RentalsController < ActionController::Base
+class Api::V1::RentalsController < Api::V1::BaseController
   def create
     @rental = Rental.new(rental_params)
     @station = Station.find(@rental[:station_id])
