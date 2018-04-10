@@ -7,10 +7,10 @@ class Api::V1::UsersController < Api::V1::BaseController
   URL = "https://api.weixin.qq.com/sns/jscode2session".freeze
 
   def create
-    puts "create"
+    # puts "create"
     # User.find_by openid: wechat_email  ||
     @user = User.create(user_wechat_params)
-    puts "oh no"
+    # puts "oh no"
     # unless @user.save
     #   render_error
     # end
@@ -47,10 +47,10 @@ class Api::V1::UsersController < Api::V1::BaseController
 
 
   def wechat_user
-    puts "wechatuser"
+    # puts "wechatuser"
 
     @wechat_response ||= RestClient.post(URL, wechat_params)
-    puts "got wechat_response"
+    # puts "got wechat_response"
     # puts @wechat_response
     @wechat_user ||= JSON.parse(@wechat_response.body)
   end
