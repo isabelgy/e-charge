@@ -25,27 +25,32 @@ user4 = User.create( name: Faker::StarTrek.character)
 
 Rental.delete_all
 
-rental1 = Rental.new
-rental1.user = user1
-rental1.station = st1
-rental1.save
-puts 'created rental'
+Station.all.each do |station|
+  Rental.create
+  puts 'created rental'
+end
 
-rental2 = Rental.new
-rental2.user = user2
-rental2.station = st2
-rental2.save
-puts 'created rental'
+# rental1 = Rental.new
+# rental1.user = user1
+# rental1.station = st1
+# rental1.save
+# puts 'created rental'
 
-rental3 = Rental.new
-rental3.user = user3
-rental3.station = st3
-rental3.save
-puts 'created rental'
+# rental2 = Rental.new
+# rental2.user = user2
+# rental2.station = st2
+# rental2.save
+# puts 'created rental'
 
-rental4 = Rental.new
-rental4.user = user4
-rental4.station = st4
-rental4.save
-puts 'created rental'
+# rental3 = Rental.new
+# rental3.user = user3
+# rental3.station = st3
+# rental3.save
+# puts 'created rental'
+
+# rental4 = Rental.new
+# rental4.user = user4
+# rental4.station = st4
+# rental4.save
+# puts 'created rental'
 
