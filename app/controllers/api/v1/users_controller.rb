@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
   require 'rest-client'
-  require 'pry-byebug'
+  # require 'pry-byebug'
 
   respond_to :json
 
