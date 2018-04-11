@@ -1,4 +1,5 @@
 class Api::V1::RentalsController < Api::V1::BaseController
+
   def create
     @rental = Rental.new(rental_params)
     @station = Station.find(@rental[:station_id])
@@ -8,6 +9,10 @@ class Api::V1::RentalsController < Api::V1::BaseController
     unless @rental.save
       render_error
     end
+  end
+
+  def show
+    @rental = Rental.find(params[:id])
   end
 
   def update
