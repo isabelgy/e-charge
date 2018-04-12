@@ -7,9 +7,9 @@ class Api::V1::RentalsController < Api::V1::BaseController
     @station.availability = !@station.rentals.any?(&:in_progress)
     @user = User.find(params[:user_id])
     @rental.user = @user
-    unless @rental.save
-      render_error
-    end
+    @rental.save
+
+
     render json: @rental
   end
 
@@ -21,9 +21,9 @@ class Api::V1::RentalsController < Api::V1::BaseController
 
   def update
     @rental = Rental.find(params[:id])
-    unless @rental.update(rental_params)
-      render_error
-    end
+    @rental.update(rental_params)
+      # render_error
+
     @station.availability = !@station.rentals.any?(&:in_progress)
   end
 
