@@ -3,13 +3,17 @@ class Api::V1::RentalsController < Api::V1::BaseController
   def create
     @rental = Rental.new(rental_params)
     @station = Station.find(@rental[:station_id])
+    @station.availability = !@station.rentals.any?(&:in_progress)
     @rental.station = @station
     @user = User.find(params[:user_id])
     @rental.user = @user
     unless @rental.save
       render_error
     end
+    render json: @rental
   end
+
+
 
   def show
     @rental = Rental.find(params[:id])
@@ -20,6 +24,7 @@ class Api::V1::RentalsController < Api::V1::BaseController
     unless @rental.update(rental_params)
       render_error
     end
+    @station.availability = !@station.rentals.any?(&:in_progress)
   end
 
   private

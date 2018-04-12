@@ -8,21 +8,21 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def create
     # puts "create"
-    # User.find_by openid: wechat_email  ||
-    @user = User.create(user_wechat_params)
-    # puts "oh no"
-    # unless @user.save
-    #   render_error
-    # end
+
+    @user = User.find_by openid: wechat_email || User.create(user_wechat_params)
+    puts @user.id
+    unless @user.save
+      render_error
+    end
     render json: @user if @user.persisted?
   end
 
   private
 
-  # def render_error
-  #   render json: { errors: @rental.errors.full_messages },
-  #     status: :unprocessable_entity
-  # end
+  def render_error
+    render json: { errors: @rental.errors.full_messages },
+      status: :unprocessable_entity
+  end
 
   def wechat_email
    @wechat_email ||= wechat_user.fetch('openid') + "@myapp.com"
