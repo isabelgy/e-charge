@@ -25,7 +25,7 @@ class Api::V1::RentalsController < Api::V1::BaseController
     @rental.update(rental_params)
       # render_error
 
-    @station.update(availability: true)
+    @rental.station.update(availability: true)
      # !@station.rentals.any?(&:in_progress)
   end
 
