@@ -9,7 +9,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   def create
     # puts "create"
 
-    @user = User.find_by openid: wechat_email || User.create(user_wechat_params)
+    @user = (User.find_by openid: wechat_email) || (User.create(user_wechat_params))
     puts @user.id
     unless @user.save
       render_error

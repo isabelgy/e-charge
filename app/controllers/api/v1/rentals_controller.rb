@@ -3,8 +3,9 @@ class Api::V1::RentalsController < Api::V1::BaseController
   def create
     @rental = Rental.new(rental_params)
     @station = Station.find(@rental[:station_id])
-    @station.availability = !@station.rentals.any?(&:in_progress)
+
     @rental.station = @station
+    @station.availability = !@station.rentals.any?(&:in_progress)
     @user = User.find(params[:user_id])
     @rental.user = @user
     unless @rental.save
