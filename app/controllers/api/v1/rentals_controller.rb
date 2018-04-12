@@ -4,8 +4,8 @@ class Api::V1::RentalsController < Api::V1::BaseController
     @rental = Rental.new(rental_params)
     @station = Station.find(@rental[:station_id])
     @rental.station = @station
-    @station.update(availability: false)
-    # !@station.rentals.any?(&:in_progress)
+    @station.update(availability: !@station.rentals.any?(&:in_progress))
+
     @user = User.find(params[:user_id])
     @rental.user = @user
     @rental.save
@@ -24,9 +24,9 @@ class Api::V1::RentalsController < Api::V1::BaseController
     @rental = Rental.find(params[:id])
     @rental.update(rental_params)
       # render_error
+      @station = @rental.station
+    @rental.station.update(availability: !@station.rentals.any?(&:in_progress))
 
-    @rental.station.update(availability: true)
-     # !@station.rentals.any?(&:in_progress)
   end
 
   private
