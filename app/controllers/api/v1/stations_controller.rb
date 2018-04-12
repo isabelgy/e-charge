@@ -40,6 +40,6 @@ class Api::V1::StationsController < Api::V1::BaseController
   end
 
   def station_params
-    params.require(:station).permit(:latitude, :longitude, :image)
+    params.require(:station).permit(:latitude, :longitude, :image, :address)
   end
 end
