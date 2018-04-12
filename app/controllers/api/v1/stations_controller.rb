@@ -18,11 +18,8 @@ class Api::V1::StationsController < Api::V1::BaseController
 
   def update
     @station = Station.find(params[:id])
-    if @station.update(station_params)
-      render :show
-    else
-      render_error
-    end
+    @station.update(station_params)
+
   end
 
   def destroy
@@ -40,6 +37,8 @@ class Api::V1::StationsController < Api::V1::BaseController
   end
 
   def station_params
-    params.require(:station).permit(:latitude, :longitude, :image, :address)
+
+    params.require(:station).permit(:latitude, :longitude, :image, :address, :availability)
+
   end
 end
