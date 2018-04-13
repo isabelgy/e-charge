@@ -1,10 +1,15 @@
 class Api::V1::StationsController < Api::V1::BaseController
   def index
+    Station.all.each do |station|
+      station.update(availability: !station.rentals.any?(&:in_progress))
+    end
     @stations = Station.all
   end
 
   def show
     @station = Station.find(params[:id])
+    @station.update(availability: !@station.rentals.any?(&:in_progress))
+    @station
   end
 
   def create
@@ -19,7 +24,6 @@ class Api::V1::StationsController < Api::V1::BaseController
   def update
     @station = Station.find(params[:id])
     @station.update(station_params)
-
   end
 
   def destroy
