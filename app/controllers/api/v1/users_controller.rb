@@ -1,6 +1,7 @@
 class Api::V1::UsersController < Api::V1::BaseController
   require 'rest-client'
   # require 'pry-byebug'
+  # config.time_zone = 'Beijing'
 
   respond_to :json
 
@@ -15,6 +16,10 @@ class Api::V1::UsersController < Api::V1::BaseController
       render_error
     end
     render json: @user if @user.persisted?
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   private
