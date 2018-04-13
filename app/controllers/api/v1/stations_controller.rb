@@ -1,14 +1,22 @@
 class Api::V1::StationsController < Api::V1::BaseController
   def index
     Station.all.each do |station|
-      station.update(availability: !station.rentals.any?(&:in_progress))
+      if station.rentals.empty?
+        station.update(availability: true)
+      else
+        station.update(availability: !station.rentals.any?(&:in_progress))
+      end
     end
     @stations = Station.all
   end
 
   def show
     @station = Station.find(params[:id])
-    @station.update(availability: !@station.rentals.any?(&:in_progress))
+    if @station.rentals.empty?
+      @station.update(availability: true)
+    else
+      @station.update(availability: !@station.rentals.any?(&:in_progress))
+    end
     @station
   end
 
