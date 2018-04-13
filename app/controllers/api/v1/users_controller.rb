@@ -20,6 +20,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     render json: @user if @user.persisted?
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   private
 
   # def render_error
